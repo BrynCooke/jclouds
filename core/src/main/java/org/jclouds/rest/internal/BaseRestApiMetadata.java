@@ -29,6 +29,7 @@ import com.google.common.annotations.Beta;
 import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.reflect.TypeParameter;
 import com.google.common.reflect.TypeToken;
+import com.google.common.reflect.TypeToken2;
 
 /**
  * Useful in creating rest apis.
@@ -56,10 +57,10 @@ public abstract class BaseRestApiMetadata extends BaseApiMetadata implements Res
    }
    
    public static <S, A> TypeToken<org.jclouds.rest.RestContext<S, A>> contextToken(TypeToken<S> apiToken, TypeToken<A> asyncApiToken) {
-      return new TypeToken<org.jclouds.rest.RestContext<S, A>>() {
+      return new TypeToken2<org.jclouds.rest.RestContext<S, A>>() {
          private static final long serialVersionUID = 1L;
       }.where(new TypeParameter<S>() {
-      }, apiToken).where(new TypeParameter<A>() {
+      }, apiToken, new TypeParameter<A>() {
       }, asyncApiToken);
    }
    
